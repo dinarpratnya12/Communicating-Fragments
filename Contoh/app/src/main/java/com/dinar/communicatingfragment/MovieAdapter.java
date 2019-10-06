@@ -42,7 +42,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final MovieModel movieModel = listMovieModel.get(position);
         holder.tvJudul.setText(movieModel.getJudul());
         holder.tvRating.setText(mContext.getResources().getString(R.string.rating) + " : " + movieModel.getRatingScore());
@@ -55,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 mBundle.putParcelable(MainActivity.class.getSimpleName(), movieModel);
                 mDetailFragment.setArguments(mBundle);
                 fragmentManager.popBackStackImmediate();
-                FragmentTransaction mFragmentTransaction = fragmentManager.beginTransaction().replace(R.id.frameLayout, mDetailFragment).addToBackStack(null);
+                FragmentTransaction mFragmentTransaction = fragmentManager.beginTransaction().replace((holder.itemView.getResources().getBoolean(R.bool.twoPanel) ? R.id.frameDetail : R.id.frameLayout), mDetailFragment).addToBackStack(null);
                 mFragmentTransaction.commit();
             }
         });

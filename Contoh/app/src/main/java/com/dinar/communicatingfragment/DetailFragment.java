@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 public class DetailFragment extends Fragment {
 
     @Nullable
@@ -31,7 +33,7 @@ public class DetailFragment extends Fragment {
 
 
         tvJudul.setText(movie.judul);
-        imageView.setImageResource(movie.poster);
+        Glide.with(view.getContext()).load(movie.getPoster()).into(imageView);
         tvGenre.setText(movie.genre);
         tvRating.setText(movie.ratingScore);
         tvConten.setText(movie.sinopsis);
